@@ -111,3 +111,7 @@ but if the paramater was a variable and not a value its not affected no matter
 
 arguments.length
 length of the argument
+
+
+to prettify your json 
+JSON.stringify(   [JSON],null,2   )
