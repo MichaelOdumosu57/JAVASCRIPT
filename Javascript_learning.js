@@ -633,6 +633,199 @@ document.cookie
     
 
 
+Document or ShadowRoot (only in chrome)
+
+.activeElement
+    
+    return element within the shadowtree that has focus
+
+    to use
+        heading
+    
+    
+    sample
+
+    
+    specs
+        read only
+        
+.fullscreenElement
+
+    return element currently in fullscreen mode
+  
+    to use
+        heading
+    
+    
+    sample
+        head to youtube type in fullscreen and open up the console
+
+    
+    specs
+        read only
+        
+.styleSheets
+
+    returns all stylesheets in explicitly linked or embeded in a document
+ 
+
+    to use
+        heading
+    
+    
+    sample
+        StyleSheetList{}
+
+    
+    specs
+        read only
+    
+    
+    .
+    Event handlers
+    
+.onfullscreenchange
+.onfullscreenerror
+.onvisibilitychange
+
+        extension.
+        GlobalEventHandlers
+        
+        
+            .onabort
+            .onblur
+            .onerror
+            .onfocus
+            .oncancel
+            .oncanplay
+                retuns null or a function
+            .oncanplaythrough
+            .onchange
+            .onclick
+            .onclose
+            .oncontextmenu
+            .oncuechange
+            .ondblclick
+            .ondrag
+            .ondragend
+            .ondragenter
+            .ondragexit
+            .ondragleave
+            .ondragover
+            .ondragstop
+            .ondrop
+            .ondurationchange
+            .onemptied
+            .onended
+            .ongotpoitnercapture
+            .oninput
+            .oninvalid
+            .onkeydown
+            
+                event for when a key is pressed, this is how hackers keylog
+                    the
+                
+                to use
+                    document.querySelector('input').onkeydown
+                
+                
+                sample
+                    input.onkeydown = logKey;
+                    
+                    function logKey(e) {
+                      log.textContent += ` ${e.code}`;
+                    }
+                    this is how you see what key is pressed
+                
+                specs
+                    read only
+                    
+                    
+            .onkeypress
+                deprecated
+            .onkeyup
+            
+                same sample template for onkeydown however when you hold the key its not
+                recorded, it is only recorded when you lift up the key
+            
+            .onload
+            
+                when the window, XML HTTPRequest has finishe loading
+                
+                    to use
+                        heading
+                    
+                    
+                    sample
+                      function load() {
+                        console.log("load event detected!");
+                      }
+                      window.onload = load;
+                   
+                    specs
+                        
+            .onloadeddata
+            .onloadedmetadata -- check this
+            .onloadend
+                when progress has stopped on loading a resource
+            .onloadstart
+                when progress has starte on loading a resource
+            .onlostpointercapture
+            .onmousedown
+            .onmouseenter
+            .onmouseleave
+            .onmousemove
+            .onmouseout
+            .onmouseover
+            .onmouseup
+            .onwheel
+            .onpause
+            .onplaying
+            .onpointerdown
+            .onpointermove
+            .onpointerup
+            .onpointercancel
+            .onpointerout
+            .onpointerenter
+            .onpointerleave
+            .onreset
+            .onresize
+            .onscroll
+            .onselect
+            .onselectstart
+            .onselectionchange
+            .onsubmit
+            .ontransitioncancel
+            .ontransitionend
+            
+.
+Methods
+
+.adoptNode
+
+    to use
+        node = document.adoptNode(externalNode);
+    
+    sample
+        var iframe = document.querySelector('iframe');
+        var iframeImages = iframe.contentDocument.querySelectorAll('img');
+        var newParent = document.getElementById('images');
+        
+        iframeImages.forEach(function(imgEl) {
+          newParent.appendChild(document.adoptNode(imgEl));
+        });
+
+    
+    specs
+        to clone a ext. doc node use document.importNode()
+        
+        
+        
+
+
+
+    
+
     
     
     
