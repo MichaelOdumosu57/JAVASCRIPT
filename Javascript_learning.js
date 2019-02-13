@@ -677,8 +677,56 @@ Document or ShadowRoot (only in chrome)
         StyleSheetList{}
 
     
+    
     specs
         read only
+    
+        .experimental
+        
+            document.compatMode
+            
+                indicates how doc is rendered
+            
+                to use
+                    document.compatMode
+                
+                specs
+                    read-only
+                    experimental
+                
+                
+            .mozSyntheticDocument
+            
+                returns true sythethic such as a standalone image or video
+            
+                to use
+                    heading
+                
+                
+                sample
+            
+                
+                specs
+                    read only
+                    experimental
+                            
+            .policy
+            
+                returns Policy API for policies applied to a document
+                
+                to use
+                    heading
+                
+                
+                sample
+                    na
+                
+                specs
+                    read only
+                    experimental
+                
+
+        
     
     
     .
@@ -819,6 +867,365 @@ Methods
     specs
         to clone a ext. doc node use document.importNode()
         
+.createAttribute
+        
+        returns an attrbiute node, DOM  does not care when you add attr's like this
+
+        to use
+            attribute = document.createAttribute(name)
+        
+        
+        sample
+            var node = document.getElementById("div1");
+            var a = document.createAttribute("my_attrib");
+            a.value = "newVal";
+            node.setAttributeNode(a);
+            console.log(node.getAttribute("my_attrib")); // "newVal"
+        
+        specs
+            read only
+        
+        compatibilty
+            yes
+    
+    
+.createCDATASection
+    
+    returns a CDATASection node
+    
+
+    to use
+        var CDATASectionNode = document.createCDATASection(data);
+    
+    
+    sample
+        var docu = new DOMParser().parseFromString('<xml></xml>', 'application/xml')
+        
+        var cdata = docu.createCDATASection('Some <CDATA> data & then some');
+        
+        docu.getElementsByTagName('xml')[0].appendChild(cdata);
+        
+        alert(new XMLSerializer().serializeToString(docu));
+        // Displays: <xml><![CDATA[Some <CDATA> data & then some]]></xml>
+
+    
+    specs
+        only works with xml
+        
+        
+    compatibilty
+        no
+        
+    files
+        DOM/createCDATASection_dom.js
+        
+.createComment()
+    return a comment node
+
+    to use
+        CommentNode = document.createComment(data);
+    
+    
+    sample
+        var docu = new DOMParser().parseFromString('<xml></xml>',  'application/xml');
+        var comment = docu.createComment('This is a not-so-secret comment in your document');
+        
+        docu.getElementsByTagName('xml')[0].appendChild(comment);
+        
+        alert(new XMLSerializer().serializeToString(docu));
+
+    
+    specs
+        docu is a different doc from what  u see in the page
+        
+    compatibilty
+        no
+        
+    files
+        createComment_dom.js
+
+.createDocumentFragment()
+
+    creates an empty Document fragment. they are DOM nodes that stay in memory an are replaced by it kids once appended to the doc. better performance
+ 
+    to use
+        var fragment = document.createDocumentFragment();
+    
+    
+    sample
+        var element  = document.getElementById('ul'); // assuming ul exists
+        var fragment = document.createDocumentFragment();
+        var browsers = ['Firefox', 'Chrome', 'Opera',
+            'Safari', 'Internet Explorer'];
+        
+        browsers.forEach(function(browser) {
+            var li = document.createElement('li');
+            li.textContent = browser;
+            fragment.appendChild(li);
+        });
+        
+        element.appendChild(fragment)
+        
+    
+    specs
+        read only
+        
+    compatibilty
+        all execept Samsung internet
+        
+    files
+        folder: createDocumentFragment
+        
+
+.createElement()
+
+    creates HTML element, or HTMLUnknownElement if !tagName in known[]
+    you can customize them too
+    
+
+    to use
+        var element = document.createElement(tagName[, options]);
+        yield
+        tagName type of element, don't use qualifed names
+            it converts to lowercase
+        options
+            allows for customization refer to options in the folder in files
+        
+    
+    
+    sample
+          var newDiv = document.createElement("div");
+          // and give it some content
+          var newContent = document.createTextNode("Hi there and greetings!");
+          // add the text node to the newly created div
+          newDiv.appendChild(newContent);
+
+    
+    specs
+        customElements is a registry
+        
+    compatibilty
+        basic: yes but samsung internet
+        options:no
+        
+        
+    files
+        folder:createElement
+        
+        
+        
+.createElementNS()
+        
+        creates an element with the given namespace
+ 
+ 
+     to use
+        var element = document.createElementNS(namespaceURI, qualifiedName[, options]);
+            namespaceURI is
+                Important Namespace URIsSection
+                    HTML
+                    http://www.w3.org/1999/xhtml
+                    SVG
+                    http://www.w3.org/2000/svg
+                    MathML
+                    http://www.w3.org/1998/mathml
+        qualifiedName- the element
+            options for compatbiliy can provide strings instead of object
+    
+    
+    sample
+
+    
+    specs
+        
+        
+    compatibilty
+        yes
+        
+    files
+
+    
+.createTextNode()
+    creates a textnode this needs to be added to an element
+    
+    
+    
+    to use
+        var text = document.createTextNode(data);
+    
+    
+    sample
+        to use
+    
+    specs
+        
+        
+    compatibilty
+        all execpt
+        
+    files
+        files: createTextNode.html
+    
+    
+    
+    
+tempalte
+
+    to use
+        heading
+    
+    
+    sample
+
+    
+    specs
+        read only
+        
+    compatibilty
+        no
+        
+    files
+            
+     
+.createExpression()
+    Compiles an XPathExpression which can then be used for (repeated) evaluations.
+        
+        
+.createNSResolver()
+    Creates an XPathNSResolver object.
+    
+.evaluate()
+    Evaluates an XPath expression.
+     
+    .
+    HTML document ext
+    
+    .close()
+        close a document stream for writing
+        
+    .execCommand()
+        on an editable document, executes the command
+        
+    .getElementsByName()
+    .hasFocus()
+        true if focues is in the doc
+    .open()
+        opens a doc stream for writing
+        
+    .queryCommandEnabled()
+        true if formatting command can be executed on the current range.
+    
+    .queryCommandState()
+        Returns true if the formating command has been executed on the current range.
+        
+    .queryCommandSupported()
+        Returns true if the formating command is supported on the current range.
+        
+    .write
+        wrties text in a document
+        
+    .writeln
+        writes a ln of text in a document
+
+        .
+        shadowRoot
+        
+            .getSelection()
+                
+                returns an object about the user text selection or an object
+                
+                to use
+                    heading
+                
+                
+                sample
+                    Selection{...}
+            
+                
+                specs
+                    
+                    
+            .elementFromPoint()
+            .elementsFromPoint()
+            
+                returns the top element at the specified coorinates
+                    
+                to use
+                    ([x],[y])
+                
+                
+                sample
+                    
+            
+                
+                specs
+                    read only
+                            
+    
+    
+            
+                
+            
+
+tempalte
+
+    to use
+        heading
+    
+    
+    sample
+
+    
+    specs
+        read only
+        
+    
+    
+            
+        
+        
+        
+         
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+        
+.requestStorageAccess()
+
+    performs negiotiation with the browser to gain access to localStorage. after 24 hours
+    it must ask the user
+    
+    its tough with this dynamic limiting
+    
+    set dom.storage_access.auto_grants in about:config to false in mozilla so it can prompt everytime
+    
+    change dom.storage_access.max_concurrent_auto_grants, to decide when the method has to ask the user
+    
+    
+    
+    to use
+        heading
+    
+    
+    sample
+        document.requestStorageAccess().then(
+          () => { console.log('access granted') },
+          () => { console.log('access denied') }
+        );
+
+    
+    specs
+        experimental
+        
+
+        
         
         
 
@@ -844,47 +1251,3 @@ template
         
     
     
-        
-document.compatMode
-
-    indicates how doc is rendered
-
-    to use
-        document.compatMode
-    
-    specs
-        read-only
-        experimental
-    
-    
-.mozSyntheticDocument
-
-    returns true sythethic such as a standalone image or video
-
-    to use
-        heading
-    
-    
-    sample
-
-    
-    specs
-        read only
-        experimental
-                
-.policy
-
-    returns Policy API for policies applied to a document
-    
-    to use
-        heading
-    
-    
-    sample
-        na
-    
-    specs
-        read only
-        experimental
-    
-
