@@ -196,6 +196,9 @@ document.characterSet
     to use
         document.characterSet
     
+    sample
+        "UTF-8"
+        
     specs
         read-only
         
@@ -206,17 +209,23 @@ document.contentType
 
     to use
         heading
+        
+    sample
+        "text/html"
     
     specs
         read-only
 
-document.doctype
+.doctype
     
     Retnrus Document Type Definition (DTD) of current document
 
     to use
         heading
     
+    sample
+        <!doctype html>
+        
     specs
         read-only
         
@@ -263,6 +272,7 @@ document.doctype
     
     
     sample
+        HTMLCollection[]
 
     
     specs
@@ -458,7 +468,7 @@ document.doctype
     
     
     sample
-        visible,hidden, prerender, unloaed
+        visible,hidden, prerender, unloaded
 
     
     specs
@@ -566,7 +576,8 @@ document.cookie
     
     
     sample
-
+        a object containing location info about the document
+    
     
     specs
         read only
@@ -579,9 +590,8 @@ document.cookie
     
     
     sample
+        "complete"
         
-
-    
     specs
         read only
         
@@ -595,6 +605,7 @@ document.cookie
     
     
     sample
+        //it seems to return a string
         
 
     
@@ -679,7 +690,7 @@ Document or ShadowRoot (only in chrome)
     
     
     specs
-        read only
+        =read only
     
         .experimental
         
@@ -869,7 +880,7 @@ Methods
         
 .createAttribute
         
-        returns an attrbiute node, DOM  does not care when you add attr's like this
+        re]turns an attrbiute node, DOM  does not care when you add attr's like this
 
         to use
             attribute = document.createAttribute(name)
@@ -888,6 +899,8 @@ Methods
         compatibilty
             yes
     
+        file
+            DOM/createAttribute_dom.js
     
 .createCDATASection
     
@@ -1065,10 +1078,104 @@ Methods
         
     files
         files: createTextNode.html
+        
+
+.createTreeWalker()
+    creates a TreeWalker object, its just like using .querySelector
+
+    to use
+    treeWalker = document.createTreeWalker(root, whatToShow, filter, entityReferenceExpansion);
+    yield
+        root-        element owned by the document
+      ||whatToShow - made from properties of NodeFilter object
+        
+        Constant,Numerical value,Description
+        NodeFilter.SHOW_ALL,-1 (that is the max value of unsigned long),Shows all nodes.
+        NodeFilter.SHOW_ATTRIBUTE,2,"Shows attribute Attr nodes. This is meaningful only when creating a TreeWalker with an Attr node as its root; in this case, it means that the attribute node will appear in the first position of the iteration or traversal. Since attributes are never children of other nodes, they do not appear when traversing over the document tree."
+        NodeFilter.SHOW_CDATA_SECTION,8,Shows CDATASection nodes.
+        NodeFilter.SHOW_COMMENT,128,Shows Comment nodes.
+        NodeFilter.SHOW_DOCUMENT,256,Shows Document nodes.
+        NodeFilter.SHOW_DOCUMENT_FRAGMENT,1024,Shows DocumentFragment nodes.
+        NodeFilter.SHOW_DOCUMENT_TYPE,512,Shows DocumentType nodes.
+        NodeFilter.SHOW_ELEMENT,1,Shows Element nodes.
+        NodeFilter.SHOW_ENTITY,32,"Shows Entity nodes. This is meaningful only when creating a TreeWalker with an Entity node as its root; in this case, it means that the Entity node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree."
+        NodeFilter.SHOW_ENTITY_REFERENCE,16,Shows EntityReference nodes.
+        NodeFilter.SHOW_NOTATION,2048,"Shows Notation nodes. This is meaningful only when creating a TreeWalker with a Notation node as its root; in this case, it means that the Notation node will appear in the first position of the traversal. Since entities are not part of the document tree, they do not appear when traversing over the document tree."
+        NodeFilter.SHOW_PROCESSING_INSTRUCTION,64,Shows ProcessingInstruction nodes.
+        NodeFilter.SHOW_TEXT,4,Shows Text nodes.
+         
+         
+        filter - helps for further granaulization on accepting node from the flag
+                with custom argumnets
+        entity
+    
+    sample
+
+    
+    specs
+        read only
+        
+    compatibilty
+        at basic support
+        
+    files
+
+
+
+.getElementByClassName
+.getElementsByTagName
+.getElementsByTagNameNS
+
+    returns elements belonging to the given tag and namespace.there is also a polyfill available
+
+    to use
+        elements = document.getElementsByTagNameNS(namespace, name)
     
     
+    sample
+        var allParas = document.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "p");
+        
+        var div1 = document.getElementById("div1")
+        var div1Paras = div1.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "p");
+
+    
+    specs
+        read only
+        
+    compatibilty
+        no
+        
+    files
+        getElementsByTagNameNS_dom.js
+        
+.importNode
+it clones a node from another document, it does not delete the original. to add it use appendChild or insertBefore
+
+    to use
+        var node = document.importNode(externalNode, deep);
+        externalNode -self
+        deep -true: take its subtree
+              false: leave its subtree
+              there is no default include the option
     
     
+    sample
+        document.importNode(oldNode, true);
+
+    
+    specs
+        read only
+        
+    compatibilty
+        no
+        
+    files
+        
+
+
+        
+
+
 tempalte
 
     to use
@@ -1085,7 +1192,81 @@ tempalte
         no
         
     files
+        
             
+
+
+
+
+.enableStyleSheetsForSet()
+    Enables the style sheets for the specified style sheet set. disabled others
+
+    to use
+        document.enableStyleSheetsForSet(name);
+        name - all stylesheet equal to the name will be enabled, others with a TITLE will be disabled
+                case sensitive
+                call with null is a noop, pass "" to disable all alternate and preferred stylesheets
+                the method does not affect no-title stylesheets document.lastStyleSheetSet or document.preferredStyleSheetSet.
+
+    
+    
+    sample
+
+    
+    specs
+        read only
+        
+    compatibilty
+        no
+        
+    files
+
+        
+
+.hasStorageAccess()
+
+
+    is a  promise with a boolean indicating whether a a document grants access to 1st party storage.
+    https://developer.mozilla.org/en-US/docs/Web/API/Storage_Access_API
+    
+    to use
+        heading
+    
+    
+    sample
+
+    
+    specs
+        read only
+        
+    compatibilty
+        no
+        
+    files
+    
+
+.requestStorageAccess()
+
+    return a promise whether the storage access was granted or not
+
+    to use
+        heading
+    
+    
+    sample
+
+    
+    specs
+        read only
+        
+    compatibilty
+        no
+        
+    files
+    
+.querySelector
+.querySelectorAll
+
      
 .createExpression()
     Compiles an XPathExpression which can then be used for (repeated) evaluations.
