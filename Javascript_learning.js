@@ -1175,25 +1175,7 @@ it clones a node from another document, it does not delete the original. to add 
 
         
 
-
-tempalte
-
-    to use
-        heading
-    
-    
-    sample
-
-    
-    specs
-        read only
-        
-    compatibilty
-        no
-        
-    files
-        
-            
+       
 
 
 
@@ -1245,23 +1227,7 @@ tempalte
     files
     
 
-.requestStorageAccess()
 
-    return a promise whether the storage access was granted or not
-
-    to use
-        heading
-    
-    
-    sample
-
-    
-    specs
-        read only
-        
-    compatibilty
-        no
-        
     files
     
 .querySelector
@@ -1360,23 +1326,7 @@ tempalte
     specs
         read only
         
-    
-    
-            
-        
-        
-        
-         
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
+
         
 .requestStorageAccess()
 
@@ -1406,19 +1356,92 @@ tempalte
         experimental
         
 
-        
-        
-        
-
-
+The event target
+    helps DOM children react to events
+    
+.addEventListener()
+    applies a function to an DOM child
+    
+    to use
+        target.addEventListener(type, listener[, useCapture]);
+        type    -  case-sensitive string for what event to listen for
+        listener-a function just like ee is node
+        useCapture (opt) - <boolean></boolean>  deals with who gets the event first when the listenner is attached to a nested element
+            try to include it all the time
+    
+    
+    sample
+        function eventHandler(event) {
+          if (event.type == 'fullscreenchange') {
+            /* handle a full screen toggle */
+          } else /* fullscreenerror */ {
+            /* handle a full screen toggle error */
+          }
+        }
 
     
+    specs
+        
+        
+    compatibilty
+        yes only at the given parameters
+        
+    files
+            
+    notes
+        the listener a function or  Object with handleEvent(), the callback
+    
+.removeEventListener()
+    removes an event listener with in the same way it was added if optons are specified
+    
+    to use
+        target.removeEventListener(type, listener[, useCapture]);
+    
+    
+    sample
 
     
-    
-    
+    specs
         
-template
+        
+    compatibilty
+        yes
+        
+    files
+        /EVENTS/removeEventListener_event.js
+    
+    notes
+        when useCapture === true, you must provide the same arguments as when you added the listener
+        if its removed while processing an event, it will not trigger if the event is triggered during the process
+        
+.dispatchEvent()
+    triggers events
+
+    to use
+        elem.dispatchEvent(event);
+    
+    sample
+        var event = new Event('build');
+        elem.addEventListener('build', function (e) { /* ... */ });
+        elem.dispatchEvent(event);
+
+    
+    specs
+        
+        
+    compatibilty
+        yes
+        
+    files
+        /EVENT/dispatch_Event.js
+    
+    notes
+        returns false only if event is cancelable and on of its handlers called
+         Event.preventDefault().
+        thows  UNSPECIFIED_EVENT_TYPE_ERR  if the error type is not specified or null
+        native actions are async, this is done synchronous
+
+tempalte
 
     to use
         heading
@@ -1428,7 +1451,21 @@ template
 
     
     specs
-        read only
         
+        
+    compatibilty
+        no
+        
+    files
+    
+    notes
+        
+     
+
+
+    
+
     
     
+    
+        
