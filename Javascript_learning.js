@@ -1452,8 +1452,17 @@ the complication occurs in event bubbling and the needed response
 
 Event Interfaces
     all of them end with "Event"
+
+if an event interface has a constructor here is how to access the info
+
+var event = _Event(typeArg)
+[element].addEventListener(typeArg, function(obj){console.log(obj)}
+[element].dispatchEvent(event)
     
-    
+to listen for an event
+[element].addEventListener(DOMString,fn,false)
+[element].on[eventname]
+
     
 {BeforeUnloadEvent}
     fires when the window document and the resources will be closed
@@ -1574,9 +1583,8 @@ tempalte
     
     notes
 
-        
-
-template
+{ErrorEvent}
+    info related to errors in scripts or files
 
     to use
         heading
@@ -1589,9 +1597,186 @@ template
         
         
     compatibilty
+        yes but the use is deprecated
+        
+    files
+    
+    notes
+        
+{FocusEvent}
+for events like focus, blur, focusin, or focusout.
+
+    
+    to use
+        heading
+    
+    
+    sample
+        var focusEvent = new FocusEvent(typeArg[, focusEventInit]);
+        typeArg - DOMString event name
+    
+    specs
+        
+        
+    compatibilty
         no
         
     files
     
+    notes
+        inherits methods from UIEvent and Event
+        FocusEvent.relatedTarget
+            a secondary target for tabbing in and out this is set to null
+
+{HashChangeEvent}
+    fires when fragment identifier of the URL has changed
+    fragment identifier is the URL that includes and after the #
+    (it a link in the document that pulls you to the section in the document)
+   
+     
+    to use
+        heading
+    
+    
+    sample
+            window.addEventListener("hashchange", funcRef, false);
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        /EVENT/HashChangeEvent/
+        
+    
+    notes
+
+        HashChangeEvent.oldURL  - change in URL navigation
+        HashChangeEvent.newURL
+        inherits Event parent methods
+
+{IDBVersionChangeEvent}
+    tells us when the IndexedDB software version has changed
+    results from IDBOpenDBRequest.onupgradeneeded  event handler
+    you wont be needing this until you learn how to use IndexedDB
+
+
+
+
+
+    to use
+        heading
+    
+    
+    sample
+                (typeArg);
+        typeArg - DOMString event name
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        IDBVersionChangeEvent.js
+ 
+    
+    notes
+        IDBVersionChangeEvent.oldVersion Read only
+            Returns the old version of the database.
+        IDBVersionChangeEvent.newVersion Read only
+            Returns the new version of the database.
+        cannot unless enviromnent is done through web protocol
+        
+{KeyboardEvent}
+    interaction with the keyboard
+
+
+template
+
+    to use
+        heading
+    
+    
+    sample
+                (typeArg);
+        typeArg - DOMString event name
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        
+ 
+    
+    notes
+        they wont be fired if the user uses an onscreen text or another method
+
+{MessageEvent}
+    represents a message received by a target object
+    
+    to use
+        MessageEvent() (not completed)
+
+    
+    
+    sample
+                (typeArg);
+        typeArg - DOMString event name
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        https://github.com/mdn/simple-shared-worker
+        
+    notes
+        represents messages
+        Server-sent events   (Eventsource.onmessage)
+        Web Sockets (onmessage property)
+        Cross-document (Window.postMessage, window.onmessage)
+        Channel messaging (MessagePort.postMessage() and MessagePort.onmessage)
+        Cross-worker/document messaging (see the above two entries,  Worker.postMessage(), Worker.onmessage, ServiceWorkerGlobalScope.onmessage, )
+        Broadcast channels (Broadcastchannel.postMessage()) and BroadcastChannel.onmessage))
+        WebRTC data channels (RTCDataChannel.onmessage)
+        avaible in webworkers
+        
+  
+  
+  
+        
+
+template
+
+    to use
+        heading
+    
+    
+    sample
+                (typeArg);
+        typeArg - DOMString event name
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        
     notes
         
