@@ -1441,7 +1441,142 @@ The event target
         thows  UNSPECIFIED_EVENT_TYPE_ERR  if the error type is not specified or null
         native actions are async, this is done synchronous
 
+
+     
+
+The EVENT fundamental functionality
+
+can be trigger by calling the event as a method of an element if availbore or the Event.dispatchEvent() method
+the complication occurs in event bubbling and the needed response
+
+
+Event Interfaces
+    all of them end with "Event"
+    
+    
+    
+{BeforeUnloadEvent}
+    fires when the window document and the resources will be closed
+
 tempalte
+
+    to use
+        window.addEventListener("beforeunload", function( event ) {})
+    
+    
+    sample
+        window.addEventListener("beforeunload", function( event ) {
+          event.preventDefault != undefined ?  event.preventDefault() : event.returnValue = "\o/";
+        });
+
+    
+    specs
+        
+        
+    compatibilty
+        yes
+        
+    files
+        /EVENT/BeforeUnloadEvent.js
+        
+    
+    notes
+        
+    
+    
+{ClipboardEvent}
+    related to cut copy and paste events
+    
+    to use
+        heading
+    
+    
+    sample
+
+    
+    specs
+        
+        
+    compatibilty
+        no (but very useful)
+        
+    files
+    
+    notes
+    
+{CloseEvent}
+    sent to websockets when the connection is closed
+    
+    to use
+        var event = new CloseEvent(typeArg);
+            typeArg- event name as a DOMString
+    
+    
+    sample
+
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+    
+    notes
+        try to check out WebSockets
+        https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+         
+    
+{CustomEvent}
+    creates a dev custom event
+
+    to use
+        var  event = new CustomEvent(typeArg, customEventInit);
+        //how this is not universal
+    
+    
+    sample
+
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+    
+    notes
+        available in Web Workers
+
+
+{DragEvent}
+    a drag and drop
+
+
+    to use
+         var event = new DragEvent(type, DragEventInit);
+        type:           DOMString naming the event
+        DragEventInit:  defaults to null, it wants a DataTransfer Object
+    
+    sample
+
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        /EVENT/DragEvent.js
+    
+    notes
+
+        
+
+template
 
     to use
         heading
@@ -1459,13 +1594,4 @@ tempalte
     files
     
     notes
-        
-     
-
-
-    
-
-    
-    
-    
         
