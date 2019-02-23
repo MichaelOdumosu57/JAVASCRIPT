@@ -26,3 +26,7 @@ for(   var i= 0; i != b.length; i++   ){
     }
     
 }
+
+for(   var i= 0; i != b.length; i++   ){
+    notes_collection += "\n" + b[i][0] + Array(   notes_length_max  - b[i][0].length + seperator ).join(" ") + s_key
+}
