@@ -14,8 +14,8 @@ var ultraObject = {
     }
 
 // var a = new UIEvent('b')
- ultraObject.eventName = 'onload'
- ultraObject.event_obj = a
- ultraObject.DOM_child[0] = document.querySelector('canvas')
- ultraObject.addEventListener()
- ultraObject.dispatchEvent()
+//  ultraObject.eventName = 'onload'
+//  ultraObject.event_obj = a
+//  ultraObject.DOM_child[0] = document.querySelector('canvas')
+//  ultraObject.addEventListener()
+//  ultraObject.dispatchEvent()
