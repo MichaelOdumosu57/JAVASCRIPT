@@ -1,0 +1,32 @@
+<html lang ='en-US'>
+    <head>
+        <script>
+        window.addEventListener('load',function(){
+        var progressBar = document.querySelector("p"),
+            client = new XMLHttpRequest()
+            console.log(progressBar.innerHTML)
+        client.open("GET", "https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent")
+        client.onprogress = function(pe) {
+            console.log(pe)
+          if(pe.lengthComputable) {
+            progressBar.max = pe.total
+            progressBar.innerHTML = pe.loaded
+          }
+        }
+        client.onloadend = function(pe) {
+        //   progressBar.innerHTML = pe.loaded
+        }
+        client.send()
+        })
+        </script>
+    
+    </head>
+<body>
+    <p>a</p>
+
+</body>
+</html>
+    
+    
+    
+    
