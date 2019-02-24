@@ -1464,6 +1464,48 @@ to listen for an event
 [element].addEventListener(DOMString,fn,false)
 [element].on[eventname]
 
+
+{Event}
+represents everything to deal with Events
+    to use
+        Event()
+    
+    
+    sample
+        dispatch Object
+        .bubbles                     -event bubbles bool
+        .cancelBubble                -if set to true stops event propagation
+        .cancelable                  -event cancelable bool
+        .composed                    -bool bubble across DOM AND ShadowDOM
+        .currentTarget               -object where event is going, this can be changed
+        .defaultPrevented            - event.preventDefault()  has been called
+        .eventPhase                  -which phase is being processed
+        .returnValue                 -IE compatability for  event.preventDefault()
+        .target                      -reference to target where event came from
+        .timeStamp                   -differnet across browser this will be a DOMHighResTimeStamp in future
+        .type                        -event name(case-insenstitive)
+        .isTrusted                   -if event was created by the browser or by script
+        .composedPath()              -returns object where listeners are invoked does not included shadow nodes with a ShadowRoot.mode closed on Shadow Tree Creation
+        .preventDefault()            -cancels the event(if cancelable)
+        .stopImmediatePropagation()  -for a specific event no other listener is called
+        .stopPropagation()           -stop event propagation further along the DOM"
+            
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        
+    notes
+        check compatability table
+        
+        for a list of all js event
+        https://developer.mozilla.org/en-US/docs/Web/Events
+        
+
 {UIEvent}
     all simple UI events
     parent of MouseEvent, TouchEvent, FocusEvent, KeyboardEvent, WheelEvent, InputEvent, and CompositionEvent.
