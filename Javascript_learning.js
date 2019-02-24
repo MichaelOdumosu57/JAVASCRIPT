@@ -1726,7 +1726,14 @@ template
     
     to use
         MessageEvent() (not completed)
-
+        obj properties
+            .data        -data sent by the message emitter
+            .origin      -USVString for origin of the message emitter.
+            .lastEventId -DOMString representing unique event ID
+            .source      -MessageEventSource which can be a MessagePort or
+                            ServiceWorker object that represents the message emitter
+            .ports       -array of MessagePort objects related to how messages get             sent
+            
     
     
     sample
@@ -1744,6 +1751,7 @@ template
         https://github.com/mdn/simple-shared-worker
         
     notes
+        USVString represents scalar string unicode values
         represents messages
         Server-sent events   (Eventsource.onmessage)
         Web Sockets (onmessage property)
@@ -1756,11 +1764,99 @@ template
         
   
   
-  
+{MouseEvent}
+    any mouse interaction future support for mousewheel
+
+
+    to use
+        MouseEvent(typeArg)
+    
+    
+    sample
+                (typeArg);
+        typeArg - DOMString event name
+        
+        dispatch object
+            
+            {
+                .altKey             -true if keydown during event
+                .button             -button number pressed during event
+                .buttons            -buttons depressed during event
+                .clientX            -X of mouse pointer by DOM coords
+                .clientY            -Y of mouse pointer bY DOM coords
+                .ctrlKey            -true if keydown during event
+                .metaKey            -true if keydown during event
+                .movementX          -x relative to position of last mousemove event
+                .movementY          -x relative to position of last mousemove event
+                .relatedTarget      -if an another listener is fired it shows up here
+                .screenX            -coord related screen dev coords (check this)
+                .screenY            -coord related screen dev coords (check this)
+                .shiftKey           -true if keydown during event
+                .getModifierState   -needs one KeyboardEvent.key to work true if pressed or locked
+            }
+    specs
+        
+        
+    compatibilty
+        cannot create your own mouse event just make sure of things ok, for keyboard props use  keyboard event instead:)
+        
+    files
+        
+    notes
+        
+{PageTransitionEvent}
+    fired when a document is loaded or unloaded
+    
+    to use
+        refer to the file
+    
+    
+    sample
+        <body onpageshow="myFunction(event)">
+            .persisted - whether the page was loaded from a cache
+    
+    
+    specs
+        
+        
+    compatibilty
+        ie safari unknown
+        
+    files
+        PageTransitionEvent.html
+        
+        
+    notes
+        
+
+{PaymentRequestUpdateEvent}
+    updates details of a PaymentRequest in response to a user action
+    
+    to use
+        var paymentRequestUpdateEvent = new PaymentRequestUpdateEvent()
+        
+    
+    sample
+        .updateWith(details)  - a method to update the object
+        
+    
+    
+    specs
+        HTTPS only
+        
+        
+    compatibilty
+        no
+        
+    files
+        
+    notes
+        
         
 
 template
 
+{}
     to use
         heading
     
