@@ -844,6 +844,7 @@ Document or ShadowRoot (only in chrome)
             .onpointermove
             .onpointerup
             .onpointercancel
+                when the browser sees that the device cannot generate events (device deactived lost signal)
             .onpointerout
             .onpointerenter
             .onpointerleave
@@ -1463,6 +1464,28 @@ to listen for an event
 [element].addEventListener(DOMString,fn,false)
 [element].on[eventname]
 
+{UIEvent}
+    all simple UI events
+    parent of MouseEvent, TouchEvent, FocusEvent, KeyboardEvent, WheelEvent, InputEvent, and CompositionEvent.
+    
+    to use
+         UIEvent() (very compatable)
+    
+    
+    sample
+        dispatch obj
+        .detail:long for event details,
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        
+    notes
     
 {BeforeUnloadEvent}
     fires when the window document and the resources will be closed
@@ -1852,7 +1875,221 @@ template
         
     notes
         
+      
+{PointerEvent}
+    its represents when a physical object applies pressure on a localized surface the machine can sense
+
+    to use
+        PointerEvent(typeArg), creates a synthetic and untrusted
+    
+    
+    sample
+        dispatch object
+        {
+            .altKey             -true if keydown during event
+            .button             -button number pressed during event
+            .buttons            -buttons depressed during event
+            .clientX            -X of mouse pointer by DOM coords
+            .clientY            -Y of mouse pointer bY DOM coords
+            .ctrlKey            -true if keydown during event
+            .metaKey            -true if keydown during event
+            .movementX          -x relative to position of last mousemove event
+            .movementY          -x relative to position of last mousemove event
+            .relatedTarget      -if an another listener is fired it shows up here
+            .screenX            -coord related screen dev coords (check this)
+            .screenY            -coord related screen dev coords (check this)
+            .shiftKey           -true if keydown during event
+            .getModifierState   -needs one KeyboardEvent.key to work true if pressed or locked
+            .pointerId           -a unique ID for the pointer
+            .width               -width in CSS pixels, of pointer contact geometry
+            .height              -height in CSS pixels, of pointer contact geometry
+            .pressure            -what pressure the machine can detect 0 for min it can detect 1 for max it can detect
+            .tangentialPressure  -cylinder stress from -1 to 1
+            .tiltX               -plane angle (degress from -90 to 90) btwn Y-Z plane and plane with transducer(stylus) and Y axis
+            .tiltY               -plane angle (degress from -90 to 90) btwn X-Z plane and plane with transducer(stylus) and X axis
+            .twist               -clockwise rotation of transducer (degrees 0 -359)
+            .pointerType         -mouse, pen touch ...
+            .isPrimary           -is this the primary pointerType
+        }
+    
+    specs
+        all PointerEvent objects are read-only
         
+        
+    compatibilty
+        avoid safari and firefox mobile
+        
+    files
+        
+    notes
+    
+          
+{ProgressEvent}
+    represents the progress of an underlying process such as XMLHttpRequest or media
+
+
+     to use
+        refer to file
+    
+    
+    sample
+        dispatch object
+        {
+            .lengthComputable   -boolean for if the progress is measureable
+            .loaded             - an unsigned long long of work done by child process. for HTTP downloads it does not consider headers and other metadata
+            .total              -unsigned long long for the work child process has done
+        }
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        ProgressEvent.html
+        
+    notes
+    
+{SVGEvent}
+    seems very experimentatal but I will attempt to learn about it. but then again
+    SVG tags have this built in
+    
+    to use
+        heading
+    
+    
+    sample
+                (typeArg);
+        typeArg - DOMString event name
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        
+    notes
+    
+{TouchEvent}
+    each touch is described by a position, size and shape, amount of pressure, and target element
+
+    to use
+        TouchEvent()
+    
+    
+    sample
+        dispatch object
+            {
+                .altKey             -true if keydown during event
+                .button             -button number pressed during event
+                .buttons            -buttons depressed during event
+                .clientX            -X of mouse pointer by DOM coords
+                .clientY            -Y of mouse pointer bY DOM coords
+                .ctrlKey            -true if keydown during event
+                .metaKey            -true if keydown during event
+                .movementX          -x relative to position of last mousemove event
+                .movementY          -x relative to position of last mousemove event
+                .relatedTarget      -if an another listener is fired it shows up here
+                .screenX            -coord related screen dev coords (check this)
+                .screenY            -coord related screen dev coords (check this)
+                .shiftKey           -true if keydown during event
+                .getModifierState   -needs one KeyboardEvent.key to work true if pressed or locked
+                .altKey             -boolean if held during event
+                .changedTouches     -a TouchList of all Touch objects at single contact points and the changes btwn them
+                .ctrlKey            -boolean if held during event
+                .metaKey            -boolean if held during event
+                .shiftKey           -Key
+                .targetTouches      -all Touch object currently in contact with the surface and were started on the same element
+                .touches            -TouchList of all Touch obj representing all current surface contact points
+            }
+    
+    
+    specs
+        
+        
+    compatibilty
+        no
+        
+    files
+        
+    notes
+        all props are read only
+        
+        touch event types are not availble from HTML
+            touchstart
+            touchend
+            touchmove
+                the rate of touchmove is browser-device specific
+            touchcancel
+                happens when a popup interferes or the touch leaves the GUI
+                or more touch events than are supported
+        
+        call preventDefault to keep the browser from sending MouseEvent, in chrome this is not needed
+        
+        to prevent blocking give {passive:false} for the options parameter
+            
+{WebGLContextEvent}
+    WebGL is a 2D 3D engine. responds to status changes in WebGL rendering context
+    https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API
+    
+    
+    to use
+        file
+    
+    
+    sample
+        dispatch obj
+            .statusMessage -info about the event
+            
+    
+    
+    specs
+        
+        
+    compatibilty
+        YES
+        
+    files
+        WebGLContextEvent.html
+        
+    notes
+        
+
+{WheelEvent}
+    when the user moves a wheel device
+
+    to use
+        WheelEvent()
+    
+    
+    sample
+        dispatch OBJECT
+        .deltaX          -double for X scroll amt
+        .deltaY          -double for Y scroll amt
+        .deltaZ          -double for Z scroll amt
+        .deltaMode:      -unsigned long represeting delta Units
+        DOM_DELTA_PIXEL  -0x00, for pixels
+        DOM_DELTA_LINE   -0x01, for lines
+        DOM_DELTA_PAGE   -0x02, for pages
+            
+    
+    specs
+        
+        
+    compatibilty
+        YES
+        
+    files
+        
+    notes
+        if keep wheel and scroll seperate
+        
+
 
 template
 
