@@ -15,17 +15,20 @@ var ultraObject = {
     open:open, // for starting xhr
     protocol :"GET", // FOR xhr protocol
     target:"https://raw.githubusercontent.com/MichaelOdumosu57/JAVASCRIPT/master/SNIPPETS_AND_TEMPLATES/ultraObject.js", // to make the xhr request from
-    xhttpreadystatechange:xhttpreadystatechange // see how you can apply ES6 but for compatability, this helps get the response text
+    xhttpreadystatechange:xhttpreadystatechange, // see how you can apply ES6 but for compatability, this helps get the response text
+    
+    seperator : 3, // for pretty print represents spaces to seperate
+    s_key:"-", // how to seperate notes and values
+    max : -Infinity || -9999999999999999999, // conisder if || is supported in the oldest browser
+    notes_object:{
+                     '.altKey': 'true if keydown during event',
+                     '.button': 'button number pressed during event'
+                }, // a sample for what pretty object can do
+    notes_collection: '', // for the final pretty print result
+    notes_entries : [], // to turn the notes_object to entries for pretty_print to do its job
+    notes_entries_fn:notes_entries_fn,// makes the note_entries
+    pretty_do:pretty_do
     }
-
-// var a = new UIEvent('b')
-//  ultraObject.eventName = 'onload'
-//  ultraObject.event_obj = a
-//  ultraObject.DOM_child[0] = document.querySelector('canvas')
-//  ultraObject.addEventListener()
-//  ultraObject.dispatchEvent()
-
-
 function addEventListener(   dev_obj   ){
         var fn;
         
@@ -129,7 +132,88 @@ function xhttpreadystatechange(){
     }
     
 } // handles getting remote reposnes
+function notes_entries_fn(   dev_obj   ){
+    ultraObject.notes_entries = Object.entries(   ultraObject.notes_object  )
+}// produces the entries for the pretty_print functionality
+function pretty_do(   dev_obj   ){
+
+                                if(   dev_obj != undefined   ){
+                                    
+                                    
+                                    if(   dev_obj.notes_object != undefined   ){
+    
+    
+                                        ultraObject.notes_object = dev_obj.notes_object
+                                        
+                                    }
+                                
+                                
+                                }
+                                
+                                
+                                this.notes_entries_fn()
+
+
+                                for(   var i= 0; i != this.notes_entries.length; i++   ){
+                                
+                                
+                                    if(   this.notes_entries[i][0].length > this.max   ){
+                                        this.max = this.notes_entries[i][0].length
+                                    }
+                                    
+                                }
+                                
+                                for(   var i= 0; i != this.notes_entries.length; i++   ){
+                                    this.notes_collection += "\n" + this.notes_entries[i][0] + Array(   this.max  - this.notes_entries[i][0].length + this.seperator ).join(" ") + this.s_key
+                                    
+                                    
+                                     	if(   typeof(   this.notes_entries[i][1]   ) == 'object'   ){
+                                
+                                
+                                     		this.notes_collection += JSON.stringify(   this.notes_entries[i][1],null,2   )
+                                
+                                
+                                     	}
+                                     	
+                                     	
+                                     	else{
+                                
+                                
+                                     		this.notes_collection += this.notes_entries[i][1]
+                                
+                                
+                                     	}
+                                     	
+                                     	
+                                }
+                                return this.notes_collection
+                            }
 
 
 
+
+
+//templates
+
+//to make an xhr request
+function h(   dev_obj   ){
+            ultraObject.DOM_child[0] = ultraObject.xhttp
+            ultraObject.eventName = 'readystatechange'
+            ultraObject.addEventListener({xhttp:'true'})
+            ultraObject.open({
+                    protocol: ultraObject.protocol,
+                    xhttp:ultraObject.xhttp,
+                    target:ultraObject.target,
+                    unk_bool:true
+                })
+            ultraObject.DOM_child[0].send()
+        }
+
+
+// var a = new UIEvent('b')
+//  ultraObject.eventName = 'onload'
+//  ultraObject.event_obj = a
+//  ultraObject.DOM_child[0] = document.querySelector('canvas')
+//  ultraObject.addEventListener()
+//  ultraObject.dispatchEvent()
 
