@@ -104,7 +104,7 @@ function open(   dev_obj   ){
 } // gets in contact with the host
 function xhttpreadystatechange(){
     console.log(    this.readyState)
-    
+    var dev_obj = undefined
     
     if (    this.readyState == 4 && this.status == 200   ) {
     
