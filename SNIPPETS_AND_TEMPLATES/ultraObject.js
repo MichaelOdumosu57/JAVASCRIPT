@@ -6,7 +6,7 @@ var ultraObject = {
     eventName:"",           //wants a DOMString event name
     event_obj:undefined,              //wants an Event
     DOM_child:{0:undefined}, // wants a DOM element
-    addEventListener:function(   dev_obj   ){ ultraObject.DOM_child[0].addEventListener(   ultraObject.eventName,dev_obj.fn !== undefined ? dev_obj.fn : ultraObject.passing_args   )},
+    addEventListener:function(   dev_obj   ){ ultraObject.DOM_child[0].addEventListener(   ultraObject.eventName,dev_obj !== undefined ? dev_obj.fn : ultraObject.passing_args   )},
     passing_args: function(   dev_obj   ){console.log(arguments)}, // use this to see parameters from functions that have something to offer
     dispatchEvent: function(   dev_obj   ){ultraObject.DOM_child[0].dispatchEvent(   ultraObject.event_obj   )}    // sync fires events
         
