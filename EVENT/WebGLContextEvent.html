@@ -1,15 +1,36 @@
 <html>
 <head>
-    <script src = "
     <script>
-        function(   dev_obj   ){
-            var canvas = document.querySelector('canvas');
-            var gl = canvas.getContext('webgl');
-            
-            canvas.addEventListener('webglcontextlost', function(e) {
-              console.log(e);
-            }, false);
-            
+    function loadUltraObject() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        console.log(this.readyState)
+        if (this.readyState == 4 && this.status == 200) {
+          // document.getElementById("demo").innerHTML = this.responseText;
+          var a = document.createElement("script")
+          var b = document.createTextNode(this.responseText)
+          a.appendChild(b)
+          document.head.appendChild(a)
+          ultraObject.eventName = 'click'
+          ultraObject.DOM_child[0] = document
+          ultraObject.addEventListener({fn:g})
+          console.log(ultraObject)
+          h()
+        }
+      };
+      /////////////////////////////////////////////////////////////
+      xhttp.open("GET", "https://raw.githubusercontent.com/MichaelOdumosu57/JAVASCRIPT/master/SNIPPETS_AND_TEMPLATES/ultraObject.js", true);
+      xhttp.send();
+      ///////////////////////////////////////////////////////////
+      
+    }
+        loadUltraObject()
+        
+        function g(   dev_obj   ){
+            ultraObject.eventName = 'webglcontextlost'
+            ultraObject.DOM_child[0] =  document.querySelector('canvas');
+            ultraObject.addEventListener()
+            var gl = ultraObject.DOM_child[0].getContext('webgl');
             gl.getExtension('WEBGL_lose_context').loseContext();
         }
     </script>
