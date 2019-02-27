@@ -27,8 +27,17 @@ var ultraObject = {
     notes_collection: '', // for the final pretty print result
     notes_entries : [], // to turn the notes_object to entries for pretty_print to do its job
     notes_entries_fn:notes_entries_fn,// makes the note_entries
-    pretty_do:pretty_do
-    }
+    pretty_do:pretty_do,
+    
+    allTags:document.all, // should i hold this here?? represents all elemetns in the browser
+    eCSearch:eCSearch,
+    isArray:isArray,
+    isObject:isObject
+    
+    
+    
+    
+}
 function addEventListener(   dev_obj   ){
         var fn;
         
@@ -188,6 +197,80 @@ function pretty_do(   dev_obj   ){
                                 }
                                 return this.notes_collection
                             }
+function isArray(   dev_obj   ){ // should combine all type query or keep seperate??
+    //.type the item in question
+    
+     if(   dev_obj !== undefined   ){
+         
+         
+        if(   Array.isArray(dev_obj.type) && typeof(   dev_obj.type   ) !== 'object'   ){
+             //an array
+             
+            return true
+            
+            
+        }
+        
+        
+     }
+     
+     
+     return false
+} // is item an object will be upgraded to test for more objects, you can use instance of but its not available everywher
+function isObject(   dev_obj   ){ // should combine all type query or keep seperate??
+    //.type the item in question
+    
+     if(   dev_obj !== undefined   ){
+         
+         
+        if(   !Array.isArray(dev_obj.type) && typeof(   dev_obj.type   ) === 'object'   ){
+             //an array
+             
+            return true
+            
+            
+        }
+        
+        
+     }
+     
+     
+     return false
+}
+function eCSearch(    dev_obj   ){
+    // .list, desired items
+    // .look spot where to look and assert for list, if an object the items should be keys
+    // look through innerHTML, innerText, textContext
+    var eCSearch_look = []
+    
+    
+    if(   dev_obj !== undefined   ){
+        
+        
+        if(   ultraObject.isArray(   {type:dev_obj.look}   )   ){
+            
+            eCSearch_look = dev_obj.look
+                
+        }
+        
+        
+        else if(   ultraObject.isObject(   {type:dev_obj.look}   )   ){
+            
+            eCSearch_look = Object.keys(   dev_obj.look   )
+                             
+        }
+        
+        
+        
+    }
+    
+    
+    for(   var eCSearch_0_i = 0; eCSearch_0_i !==  ultraObject.allTags.length;  eCSearch_0_i++   ){
+        for(   var eCSearch_1_i = 0; eCSearch_1_i !==  eCSearch_look.length;  eCSearch_1_i++   )
+        console.log(   ultraObject.allTags[eCSearch_0_i][eCSearch_look[eCSearch_1_i]]   )
+    }
+    console.log(   eCSearch_look   )
+}// seaches for elements with the queried filters and does things to them
 
 
 
@@ -209,11 +292,14 @@ function h(   dev_obj   ){
             ultraObject.DOM_child[0].send()
         }
 
+//to add an eventListener
+function a(   dev_obj   ){
+    ultraObject.eventName = 'click'
+    ultraObject.DOM_child[0] = document
+    ultraObject.addEventListener()
+}
 
-// var a = new UIEvent('b')
-//  ultraObject.eventName = 'onload'
-//  ultraObject.event_obj = a
-//  ultraObject.DOM_child[0] = document.querySelector('canvas')
-//  ultraObject.addEventListener()
-//  ultraObject.dispatchEvent()
-
+//to query for items in the DOM
+function b(   dev_obj   ){
+    
+}
