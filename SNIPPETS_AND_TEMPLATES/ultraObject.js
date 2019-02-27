@@ -32,7 +32,8 @@ var ultraObject = {
     allTags:document.all, // should i hold this here?? represents all elemetns in the browser
     eCSearch:eCSearch,
     isArray:isArray,
-    isObject:isObject
+    isObject:isObject,
+    elementFound:{} // holds found elements needed by the ultraObject
     
     
     
@@ -241,7 +242,11 @@ function eCSearch(    dev_obj   ){
     // .list, desired items
     // .look spot where to look and assert for list, if an object the items should be keys
     // look through innerHTML, innerText, textContext
-    var eCSearch_look = []
+    // holds the found elements that meet the query in ultraObject.elementFound
+    var eCSearchLook = []
+    var eCSearchList = []
+    var eCSearchProp
+    var eCSearchElem
     
     
     if(   dev_obj !== undefined   ){
@@ -249,14 +254,36 @@ function eCSearch(    dev_obj   ){
         
         if(   ultraObject.isArray(   {type:dev_obj.look}   )   ){
             
-            eCSearch_look = dev_obj.look
+            
+            eCSearchLook = dev_obj.look
+            
                 
         }
         
         
         else if(   ultraObject.isObject(   {type:dev_obj.look}   )   ){
             
-            eCSearch_look = Object.keys(   dev_obj.look   )
+            
+            eCSearchLook = Object.keys(   dev_obj.look   )
+            
+                             
+        }
+        
+        
+        if(   ultraObject.isArray(   {type:dev_obj.list}   )   ){
+            
+            
+            eCSearchList = dev_obj.list
+                
+                
+        }
+        
+        
+        else if(   ultraObject.isObject(   {type:dev_obj.list}   )   ){
+            
+            
+            eCSearchList = Object.keys(   dev_obj.list   )
+            
                              
         }
         
@@ -266,11 +293,65 @@ function eCSearch(    dev_obj   ){
     
     
     for(   var eCSearch_0_i = 0; eCSearch_0_i !==  ultraObject.allTags.length;  eCSearch_0_i++   ){
-        for(   var eCSearch_1_i = 0; eCSearch_1_i !==  eCSearch_look.length;  eCSearch_1_i++   )
-        console.log(   ultraObject.allTags[eCSearch_0_i][eCSearch_look[eCSearch_1_i]]   )
+        for(   var eCSearch_1_i = 0; eCSearch_1_i !==  eCSearchLook.length;  eCSearch_1_i++   ){
+            for(   var eCSearch_2_i = 0; eCSearch_2_i !==  eCSearchList.length;  eCSearch_2_i++   ){
+                eCSearchProp = ultraObject.allTags[eCSearch_0_i][eCSearchLook[eCSearch_1_i]]
+                eCSearchElem = ultraObject.allTags[eCSearch_0_i]
+                
+                
+                
+                if(   eCSearchProp === undefined   ){
+                    
+                    
+                    continue;
+                    
+                    
+                }
+                
+                
+                else if(   eCSearchProp !== undefined   ){
+                    
+                    
+                    eCSearchProp.toString()
+                    
+                    
+                }
+                
+                
+                try{
+                    
+                    
+                    if(   eCSearchList[eCSearch_2_i].match(   eCSearchProp.toString()   )[0] === eCSearchList[eCSearch_2_i]   ){
+                        
+                        
+                        // console.log(   eCSearchList[eCSearch_2_i].match(   eCSearchProp.toString()   )[0]    )
+                        // console.log(   eCSearchElem    )
+                        
+                        
+                        if(   ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] !== eCSearchElem   ){
+                            
+                            
+                            ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] = eCSearchElem
+                                
+                            
+                            
+                        }
+                                            
+                        
+                    }
+                    
+                    
+                }
+                catch(   e   ){
+                                        
+                }
+            }
+        }
     }
-    console.log(   eCSearch_look   )
+    console.log(   eCSearchLook   )
 }// seaches for elements with the queried filters and does things to them
+
+
 
 
 
@@ -301,5 +382,20 @@ function a(   dev_obj   ){
 
 //to query for items in the DOM
 function b(   dev_obj   ){
+    console.log(   dev_obj   )
+    eCSearch({
+        list:dev_obj.list,
+        look:dev_obj.look,
+    })
     
 }
+
+    b({
+        list:{'IBB':null,'XBI':null,'SPX':null},
+        look:{ 'innerHTML':null,'innerText':null,'textContext':null}
+    })
+
+// b({
+//     list: { 'LinkedIn Profile':null,  'Website':null, 'How did you hear about this job?':null},
+//     look: { 'innerHTML':null,'innerText':null,'textContext':null}
+// })
