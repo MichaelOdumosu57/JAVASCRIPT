@@ -29,7 +29,7 @@ var ultraObject = {
     notes_entries_fn:notes_entries_fn,// makes the note_entries
     pretty_do:pretty_do,
     
-    allTags:document.all, // should i hold this here?? represents all elemetns in the browser
+    allTags:undefined, // should i hold this here?? represents serach range for the ultraObject concerning elements
     eCSearch:eCSearch,
     isArray:isArray,
     isObject:isObject,
@@ -238,7 +238,7 @@ function isObject(   dev_obj   ){ // should combine all type query or keep seper
      
      return false
 }
-function eCSearch(    dev_obj   ){
+function eCSearch(   dev_obj   ){
     // .list, desired items
     // .look spot where to look and assert for list, if an object the items should be keys
     // look through innerHTML, innerText, textContext
@@ -350,7 +350,27 @@ function eCSearch(    dev_obj   ){
     }
     console.log(   eCSearchLook   )
 }// seaches for elements with the queried filters and does things to them
-
+function removeCN(   dev_obj   ){
+    // removes specified childNodes from the DOM
+    removeCNLength = Object.keys(   ultraObject.elementFound   ).length
+    for(   var removeCN_0_i = 0; removeCN_0_i !== removeCNLength;  removeCN_0_i++){
+        
+        
+        if(   ultraObject.elementFound[removeCN_0_i] !== undefined   ){
+            
+            console.log(   ultraObject.elementFound[removeCN_0_i]   )
+            ultraObject.elementFound[removeCN_0_i].remove()
+            ultraObject.elementFound[removeCN_0_i] = 'elementRemoved'
+            // is it removed
+            console.log(   ultraObject.elementFound[removeCN_0_i]   )
+        
+        }
+        
+            
+        console.log(   removeCN_0_i   )
+    }
+    console.log(   'compeleted'   )
+}
 
 
 
@@ -379,23 +399,12 @@ function a(   dev_obj   ){
     ultraObject.DOM_child[0] = document
     ultraObject.addEventListener()
 }
-
-//to query for items in the DOM
 function b(   dev_obj   ){
     console.log(   dev_obj   )
+    ultraObject.allTags = dev_obj.allTags
     eCSearch({
         list:dev_obj.list,
         look:dev_obj.look,
     })
-    
+    removeCN()    
 }
-
-    b({
-        list:{'IBB':null,'XBI':null,'SPX':null},
-        look:{ 'innerHTML':null,'innerText':null,'textContext':null}
-    })
-
-// b({
-//     list: { 'LinkedIn Profile':null,  'Website':null, 'How did you hear about this job?':null},
-//     look: { 'innerHTML':null,'innerText':null,'textContext':null}
-// })
