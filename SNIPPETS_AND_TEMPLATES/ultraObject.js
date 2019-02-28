@@ -8,13 +8,24 @@
 //is {}[] allowed in ES5
 // templates
 // FL_0_i for loop object in the purpose action
-// {
-//     forLoop_0_i:0,
-//     forLoopLength:Object.keys(   ultraObject.identifyEO   ).length,
-//     fn:function(   dev_obj   ){},
-//     args:{}
-// }
+/*
+{
+ forLoop_0_i:0,
+ forLoopLength:Object.keys(   ultraObject.identifyEO   ).length,
+ fn:function(   dev_obj   ){},
+ args:{}
+}
+*/
+ 
+//
+/*
+if(   dev_obj !== undefined   ){
+
+}
+*/
+// __poss stands for possiblity
 function ultraObjectReset(   dev_obj   ){
+    //I know about ES6 but this is an ultraObject right???
     return {
     eventName:"",           //wants a DOMString event name
     event_obj:undefined,              //wants an Event
@@ -54,7 +65,8 @@ function ultraObjectReset(   dev_obj   ){
     forLoop:forLoop,
     objInvloved:objInvloved,// to keep track of all items responbile for a purpose at a specific point
     objIO:{}, // OBKECT FOR VobjInvloved
-    objIFL_0_i:{}
+    objIFL_0_i:{},
+    severalOr:severalOr
     }
 }
 var ultraObject = ultraObjectReset()
@@ -518,18 +530,53 @@ function removeOP(   dev_obj   ){
 } //remove specific properties from obj
 function forLoop(   dev_obj   ){
     
-    
+    var forLoopbreak = false
     if(   dev_obj !== undefined   ){
 
         
         for(   dev_obj.forLoop_0_i; dev_obj.forLoop_0_i !== dev_obj.forLoopLength; dev_obj.forLoop_0_i++   ){
                 // console.log(   dev_obj.forLoop_0_i   )
-                dev_obj.fn(   dev_obj.args   )// find a better way to do this
+                forLoopbreak = dev_obj.fn(   dev_obj.args   )// find a better way to do this
+                
+                
+                if(   forLoopbreak === 'true'   ){
+                    
+                    
+                    break;
+                    
+                    
+                }
+                
+                
         }
         dev_obj.forLoop_0_i = 0
 
         
     }
+}
+function severalOr(   dev_obj   ){ // if you have several OR comparisons for the same object use it here
+
+
+    if(   dev_obj !== undefined   ){
+        var severalOrFL_O_i  = {
+                        forLoop_0_i:0,
+                        forLoopLength:dev_obj.compAgn.length,//compare Against
+                        fn:function(   dev_obj   ){
+                                if(   dev_obj.compTo === dev_obj.compAgn[severalOrFL_O_i.forLoop_0_i]   ){
+                                    dev_obj.boolean[0] = true // if you have problems remember this wants a object
+                                    return true
+                                }
+                            },
+                        args:{
+                                compTo: dev_obj.compTo,
+                                compAgn:dev_obj.compAgn,
+                                boolean:dev_obj.boolean
+                            }
+                    }
+        ultraObject.forLoop(   severalOrFL_O_i   )
+    }
+    
+    
 }
 function identifyE(   dev_obj   ){
     var identifyELength = Object.keys(   ultraObject.elementFound   ).length
@@ -545,42 +592,96 @@ function identifyE(   dev_obj   ){
                 
                 if(   ultraObject.elementFound[identifyE_0_i].item.tagName.toLowerCase() !== 'input'   ){// if there is more needed make a function im not writing these massive loops
                 
-                    identifyEC['0'] = ultraObject.elementFound[identifyE_0_i].item
+                    identifyEC['0'] = ultraObject.elementFound[identifyE_0_i].item.querySelectorAll("*")// gr8 now we can grab all element children
                     var identifyE_1_i = 0
                     var iEFL_1_i ={
                         forLoop_0_i: identifyE_1_i,
-                        forLoopLength:ultraObject.elementFound[identifyE_0_i].item.children.length,
+                        forLoopLength:identifyEC['0'].length,
                         fn:function(   dev_obj   ){
                             
+                                                        
+                            if(   ultraObject.identifyEO[identifyE_0_i] === undefined   ){
+                                
+                                
+                                ultraObject.identifyEO[identifyE_0_i]  = {item : {}}
+                                
+                                                                    
+                            }
+                            ultraObject.identifyEO.boolVal = {0:false}
+                            ultraObject.severalOr({
+                                            compTo: identifyEC['0'][iEFL_1_i.forLoop_0_i].tagName.toLowerCase(),
+                                            compAgn: {0:'input',length:1},
+                                            boolean:ultraObject.identifyEO.boolVal
+                                })
+                            if(   ultraObject.identifyEO.boolVal[0]   ){ // if more have it come in as a parameter and make a function comparing every one
+                                 
+                                ultraObject.identifyEO.boolVal = {0:false}//remember to reset it
+                                ultraObject.identifyEO[identifyE_0_i].item[Object.keys(   ultraObject.identifyEO[identifyE_0_i].item   ).length] = {item:{}} // for all the identifyEC['0']descendants
+                                ultraObject.identifyEO[identifyE_0_i].item[Object.keys(   ultraObject.identifyEO[identifyE_0_i].item   ).length -1 ].item = identifyEC['0'][iEFL_1_i.forLoop_0_i]
+                                // actual placement of the descendants
                             
-                                if(   ultraObject.identifyEO[identifyE_0_i] === undefined   ){
-                                    
-                                    
-                                    ultraObject.identifyEO[identifyE_0_i]  = {item : {}}
-                                    
-                                                                        
-                                }
-                                
-                                
-                                if(   identifyEC['0'].children[iEFL_1_i.forLoop_0_i].tagName.toLowerCase() === 'input'   ){
-                                    
-                                    
-                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_1_i.forLoop_0_i] = {item:{}}
-                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_1_i.forLoop_0_i].item[iEFL_1_i.forLoop_0_i] = identifyEC['0'].children[iEFL_1_i.forLoop_0_i]
-                                    
-                                
-                                }
-                                
-                                
-                            },
+                            }
+                                                                                            
+                                                            
+                        },
                         args:undefined
                     }
                     console.log(   identifyE_0_i   )
                     ultraObject.forLoop(   iEFL_1_i   )
+                    console.group('after first loop')
+                    ultraObject.objInvloved({
+                            0:ultraObject.elementFound,
+                            1:ultraObject.identifyEO,
+                            2:identifyEC,
+                            3:ultraObject.forLoop,
+                            4:ultraObject.objInvloved
+                        })
+                    console.groupEnd()
+                    var iEFL_2_i ={
+                        forLoop_0_i:0,
+                        forLoopLength:Object.keys(   ultraObject.identifyEO   ).length,
+                        fn:function(   dev_obj   ){
+                            
+                                                        
+                            if(   Object.keys(   ultraObject.identifyEO[iEFL_2_i.forLoop_0_i].item   ).length === 0   ){
+                                // console.log(   ultraObject.identifyEO[iEFL_2_i.forLoop_0_i]   )
+                                ultraObject.elementFound[iEFL_2_i.forLoop_0_i].status = 'findChild'
+                                var iEFL_3_i =  {
+                                         forLoop_0_i:0,
+                                         forLoopLength:Object.keys(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children  ).length,
+                                         fn:function(   dev_obj   ){
+                                             console.log(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children[iEFL_3_i.forLoop_0_i]   )
+                                             
+                                                                                                                                     
+                                            if(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children[iEFL_3_i.forLoop_0_i].tagName !== 'input' && ultraObject.elementFound[iEFL_2_i.forLoop_0_i].status !== 'relativeFound_poss'   ){
+                                                
+                                            }
+                                            
+                                            
+                                         },
+                                         args:{}
+                                     }
+                                                        //furher search required
+                                // console.log(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i]   )
+                                ultraObject.forLoop(   iEFL_3_i   )
+                                        
+                            }
+                            
+                            
+                        },
+                        args:{}
+                    }
+                    console.group('fl')
+                    // ultraObject.forLoop(   iEFL_2_i   )
+                    console.groupEnd()
+                    // console.group('checking relatives')
                     // ultraObject.objInvloved({
                     //         0:ultraObject.elementFound,
-                    //         1:ultraObject.identifyEO
+                    //         1:ultraObject.identifyEO,
+                    //         2:ultraObject.forLoop,
+                    //         3:ultraObject.objInvloved
                     //     })
+                    // console.groupEnd()
                     // console.log(   ultraObject.elementFound[identifyE_0_i].item.parentElement   )
                     // if not found in the parentNode find in the parentElement
                     // child nodes may contain text nodes
@@ -596,46 +697,7 @@ function identifyE(   dev_obj   ){
         
     }
     
-    
-    if(   dev_obj.action === 'preFill'   ){
         
-        
-        var iEFL_2_i ={
-            forLoop_0_i:0,
-            forLoopLength:Object.keys(   ultraObject.identifyEO   ).length,
-            fn:function(   dev_obj   ){
-                
-                
-                
-                if(   Object.keys(   ultraObject.identifyEO[iEFL_2_i.forLoop_0_i].item   ).length === 0   ){
-                    console.log(   ultraObject.identifyEO[iEFL_2_i.forLoop_0_i]   )
-                    ultraObject.elementFound[iEFL_2_i.forLoop_0_i].status = 'findChild'
-                    var iEFL_3_i =  {
-                             forLoop_0_i:0,
-                             forLoopLength:Object.keys(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children  ).length,
-                             fn:function(   dev_obj   ){
-                                 console.log(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children[iEFL_3_i.forLoop_0_i]   )
-                                 },
-                             args:{}
-                         }
-                                            //furher search required
-                    // console.log(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i]   )
-                    ultraObject.forLoop(   iEFL_3_i   )
-                            
-                }
-                
-                
-                },
-            args:{}
-        }
-        console.group('fl')
-        ultraObject.forLoop(   iEFL_2_i   )
-        console.groupEnd()
-        
-        
-    }
-    
-    
 } // identifies tags in elementFound and what is needed to do the next tasl
 
 // if(   dev_obj !== undefined   )
