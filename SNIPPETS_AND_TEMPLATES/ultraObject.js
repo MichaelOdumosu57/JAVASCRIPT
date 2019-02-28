@@ -6,8 +6,14 @@
 //if your find problems search PROBLEMS to see whats going on
 
 //is {}[] allowed in ES5
-
+// templates
 // FL_0_i for loop object in the purpose action
+// {
+//     forLoop_0_i:0,
+//     forLoopLength:Object.keys(   ultraObject.identifyEO   ).length,
+//     fn:function(   dev_obj   ){},
+//     args:{}
+// }
 function ultraObjectReset(   dev_obj   ){
     return {
     eventName:"",           //wants a DOMString event name
@@ -48,22 +54,22 @@ function ultraObjectReset(   dev_obj   ){
     forLoop:forLoop,
     objInvloved:objInvloved,// to keep track of all items responbile for a purpose at a specific point
     objIO:{}, // OBKECT FOR VobjInvloved
-    objIO_0_i:{}
+    objIFL_0_i:{}
     }
 }
 var ultraObject = ultraObjectReset()
 function objInvloved(   dev_obj   ){
         ultraObject.objIO = dev_obj
         var objInvloved_0_i = 0
-        ultraObject.objIO_0_i={
+        ultraObject.objIFL_0_i={
             forLoop_0_i: objInvloved_0_i,
             forLoopLength:Object.entries(   dev_obj   ).length,
             fn:function(      ){
-                console.log(   ultraObject.objIO[ultraObject.objIO_0_i.forLoop_0_i]   )
+                console.log(   ultraObject.objIO[ultraObject.objIFL_0_i.forLoop_0_i]   )
                 },
             args:undefined
         }
-        forLoop(   ultraObject.objIO_0_i   )
+        forLoop(   ultraObject.objIFL_0_i   )
 }
 function addEventListener(   dev_obj   ){
         var fn;
@@ -517,7 +523,8 @@ function forLoop(   dev_obj   ){
 
         
         for(   dev_obj.forLoop_0_i; dev_obj.forLoop_0_i !== dev_obj.forLoopLength; dev_obj.forLoop_0_i++   ){
-                dev_obj.fn()// find a better way to do this
+                // console.log(   dev_obj.forLoop_0_i   )
+                dev_obj.fn(   dev_obj.args   )// find a better way to do this
         }
         dev_obj.forLoop_0_i = 0
 
@@ -537,9 +544,10 @@ function identifyE(   dev_obj   ){
                 
                 
                 if(   ultraObject.elementFound[identifyE_0_i].item.tagName.toLowerCase() !== 'input'   ){// if there is more needed make a function im not writing these massive loops
+                
                     identifyEC['0'] = ultraObject.elementFound[identifyE_0_i].item
                     var identifyE_1_i = 0
-                    var iEFL_0_i ={
+                    var iEFL_1_i ={
                         forLoop_0_i: identifyE_1_i,
                         forLoopLength:ultraObject.elementFound[identifyE_0_i].item.children.length,
                         fn:function(   dev_obj   ){
@@ -554,14 +562,11 @@ function identifyE(   dev_obj   ){
                                 }
                                 
                                 
-                                if(   identifyEC['0'].children[iEFL_0_i.forLoop_0_i].tagName.toLowerCase() === 'input'   ){
+                                if(   identifyEC['0'].children[iEFL_1_i.forLoop_0_i].tagName.toLowerCase() === 'input'   ){
                                     
                                     
-                                console.log(   identifyEC['0'].children[iEFL_0_i.forLoop_0_i].tagName.toLowerCase()   )
-                                console.log(   Object.entries(   ultraObject.identifyEO   )   )
-                                console.log(   ultraObject.identifyEO[identifyE_0_i],identifyE_0_i   )
-                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_0_i.forLoop_0_i] = {item:{}}
-                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_0_i.forLoop_0_i].item[iEFL_0_i.forLoop_0_i] = identifyEC['0'].children[iEFL_0_i.forLoop_0_i]
+                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_1_i.forLoop_0_i] = {item:{}}
+                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_1_i.forLoop_0_i].item[iEFL_1_i.forLoop_0_i] = identifyEC['0'].children[iEFL_1_i.forLoop_0_i]
                                     
                                 
                                 }
@@ -571,7 +576,11 @@ function identifyE(   dev_obj   ){
                         args:undefined
                     }
                     console.log(   identifyE_0_i   )
-                    ultraObject.forLoop(   iEFL_0_i   )
+                    ultraObject.forLoop(   iEFL_1_i   )
+                    // ultraObject.objInvloved({
+                    //         0:ultraObject.elementFound,
+                    //         1:ultraObject.identifyEO
+                    //     })
                     // console.log(   ultraObject.elementFound[identifyE_0_i].item.parentElement   )
                     // if not found in the parentNode find in the parentElement
                     // child nodes may contain text nodes
@@ -586,10 +595,47 @@ function identifyE(   dev_obj   ){
         
         
     }
-    objInvloved({
-        0:ultraObject.elementFound,
-        1:ultraObject.identifyEO
-    })
+    
+    
+    if(   dev_obj.action === 'preFill'   ){
+        
+        
+        var iEFL_2_i ={
+            forLoop_0_i:0,
+            forLoopLength:Object.keys(   ultraObject.identifyEO   ).length,
+            fn:function(   dev_obj   ){
+                
+                
+                
+                if(   Object.keys(   ultraObject.identifyEO[iEFL_2_i.forLoop_0_i].item   ).length === 0   ){
+                    console.log(   ultraObject.identifyEO[iEFL_2_i.forLoop_0_i]   )
+                    ultraObject.elementFound[iEFL_2_i.forLoop_0_i].status = 'findChild'
+                    var iEFL_3_i =  {
+                             forLoop_0_i:0,
+                             forLoopLength:Object.keys(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children  ).length,
+                             fn:function(   dev_obj   ){
+                                 console.log(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i].item.children[iEFL_3_i.forLoop_0_i]   )
+                                 },
+                             args:{}
+                         }
+                                            //furher search required
+                    // console.log(   ultraObject.elementFound[iEFL_2_i.forLoop_0_i]   )
+                    ultraObject.forLoop(   iEFL_3_i   )
+                            
+                }
+                
+                
+                },
+            args:{}
+        }
+        console.group('fl')
+        ultraObject.forLoop(   iEFL_2_i   )
+        console.groupEnd()
+        
+        
+    }
+    
+    
 } // identifies tags in elementFound and what is needed to do the next tasl
 
 // if(   dev_obj !== undefined   )
