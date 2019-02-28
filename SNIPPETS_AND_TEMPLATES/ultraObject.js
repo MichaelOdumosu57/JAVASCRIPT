@@ -2,6 +2,10 @@
 
 // an OOP way to do everything javascript, I meant to have this done in python with a superclass oh well
 // for meaningful use, every property purpose is easily availble to each other
+
+//if your find problems search PROBLEMS to see whats going on
+
+//is {}[] allowed in ES5
 var ultraObject = {
     eventName:"",           //wants a DOMString event name
     event_obj:undefined,              //wants an Event
@@ -33,9 +37,9 @@ var ultraObject = {
     eCSearch:eCSearch,
     isArray:isArray,
     isObject:isObject,
-    elementFound:{} // holds found elements needed by the ultraObject
-    
-    
+    elementFound:{}, // holds found elements needed by the ultraObject
+    removeCN:removeCN,
+    removeOP:removeOP
     
     
 }
@@ -247,7 +251,9 @@ function eCSearch(   dev_obj   ){
     var eCSearchList = []
     var eCSearchProp
     var eCSearchElem
-    
+    var eCSearchProp_obj = {
+                                cBQ:undefined  //chop question marl
+                            }
     
     if(   dev_obj !== undefined   ){
         
@@ -298,8 +304,7 @@ function eCSearch(   dev_obj   ){
                 eCSearchProp = ultraObject.allTags[eCSearch_0_i][eCSearchLook[eCSearch_1_i]]
                 eCSearchElem = ultraObject.allTags[eCSearch_0_i]
                 
-                
-                
+                            
                 if(   eCSearchProp === undefined   ){
                     
                     
@@ -312,26 +317,61 @@ function eCSearch(   dev_obj   ){
                 else if(   eCSearchProp !== undefined   ){
                     
                     
-                    eCSearchProp.toString()
-                    
-                    
+                    eCSearchProp = eCSearchProp.toString()
+                    // console.log(   eCSearchProp    )
+                    // console.log(   eCSearchList[eCSearch_2_i]   )
+                    // console.log(   eCSearchProp.match(   eCSearchList[eCSearch_2_i]  )   )
+                    // console.log(   eCSearchProp.match(   eCSearchList[eCSearch_2_i]   ) !== null ? eCSearchProp.match(   eCSearchList[eCSearch_2_i]   )[0] === eCSearchList[eCSearch_2_i] : null    )
+                        // match chops off the question mark for some reason
+                        //sdafdfa?sassa'.match('a?s') does not work as intenede
                 }
                 
                 
-                try{
+                try{//async might have a problem with this
                     
                     
-                    if(   eCSearchList[eCSearch_2_i].match(   eCSearchProp.toString()   )[0] === eCSearchList[eCSearch_2_i]   ){
+                    if(   eCSearchList[eCSearch_2_i].indexOf('?') !== -1   ){
+                    
+                    
+                        if(   eCSearchProp.match(   eCSearchList[eCSearch_2_i]   ) !== null   ){
+                            
+                            
+                            eCSearchProp_obj.cBQ = eCSearchProp.match(   eCSearchList[eCSearch_2_i]   )[0] + "?"
                         
+                        
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    else if(   eCSearchList[eCSearch_2_i].indexOf('?') === -1   ){
+                        
+                        
+                        if(   eCSearchProp.match(   eCSearchList[eCSearch_2_i]   ) !== null   ){
+                            
+                            
+                            eCSearchProp_obj.cBQ = eCSearchProp.match(   eCSearchList[eCSearch_2_i]   )[0]
+                            
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    console.log(   eCSearchProp_obj.cBQ, eCSearchList[eCSearch_2_i]   )
+                    console.log(   eCSearchProp_obj.cBQ === eCSearchList[eCSearch_2_i]     )
+                    if(   eCSearchProp_obj.cBQ === eCSearchList[eCSearch_2_i]     ){
+                        //PROBLEMS
                         
                         // console.log(   eCSearchList[eCSearch_2_i].match(   eCSearchProp.toString()   )[0]    )
                         // console.log(   eCSearchElem    )
-                        
-                        
+                    
                         if(   ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] !== eCSearchElem   ){
                             
                             
-                            ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] = eCSearchElem
+                            ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] = {item:eCSearchElem,query:eCSearchProp}
                                 
                             
                             
@@ -343,7 +383,7 @@ function eCSearch(   dev_obj   ){
                     
                 }
                 catch(   e   ){
-                                        
+                    // console.log(e)
                 }
             }
         }
@@ -352,17 +392,33 @@ function eCSearch(   dev_obj   ){
 }// seaches for elements with the queried filters and does things to them
 function removeCN(   dev_obj   ){
     // removes specified childNodes from the DOM
+    
+    
+    if(   dev_obj != undefined   ){
+        
+        
+        if(   dev_obj.rules === 'all'   ){
+            continue;
+        }
+        
+        
+        else if(   dev_obj.rules === 'duplicates'   ){
+                
+        }
+        
+        // if the rules are differnent consider before items are removed
+    }
     removeCNLength = Object.keys(   ultraObject.elementFound   ).length
     for(   var removeCN_0_i = 0; removeCN_0_i !== removeCNLength;  removeCN_0_i++){
         
         
         if(   ultraObject.elementFound[removeCN_0_i] !== undefined   ){
             
-            console.log(   ultraObject.elementFound[removeCN_0_i]   )
+            
             ultraObject.elementFound[removeCN_0_i].remove()
             ultraObject.elementFound[removeCN_0_i] = 'elementRemoved'
             // is it removed
-            console.log(   ultraObject.elementFound[removeCN_0_i]   )
+            
         
         }
         
@@ -371,6 +427,50 @@ function removeCN(   dev_obj   ){
     }
     console.log(   'compeleted'   )
 }
+function removeOP(   dev_obj   ){
+    
+    
+    var removeOPLength;
+    if(   dev_obj !== undefined   ){
+        
+                    
+        if(   dev_obj.rules === 'duplicates'   ){
+            
+            
+            removeOPLength = Object.keys(   this.elementFound   ).length   //be careful for nesting
+            for(   var removeOP_0_i = 1; removeOP_0_i !== removeOPLength; removeOP_0_i++   ){
+                
+                // console.log(removeOP_0_i,this.elementFound[removeOP_0_i].item)
+                // console.log(   this.elementFound[removeOP_0_i].item === this.elementFound[removeOP_0_i].item   )
+                
+                
+                for(   var removeOP_1_i = 0; removeOP_1_i !== removeOPLength; removeOP_1_i++   ){
+                    
+                    // console.log(   removeOP_1_i   )
+                    
+                        if(   this.elementFound[removeOP_0_i].item === this.elementFound[removeOP_1_i].item && removeOP_0_i !== removeOP_1_i  ){
+                            
+                            
+                            this.elementFound[removeOP_0_i].item = null
+                            break
+                            
+                            
+                        }
+                        
+                    
+                }
+                                
+                
+            }
+        }
+        
+        // if the rules are differnent consider before items are removed
+    }
+    
+    
+    console.log(   this.elementFound   )
+    
+} //remove specific properties from obj
 
 
 
@@ -400,11 +500,25 @@ function a(   dev_obj   ){
     ultraObject.addEventListener()
 }
 function b(   dev_obj   ){
-    console.log(   dev_obj   )
     ultraObject.allTags = dev_obj.allTags
-    eCSearch({
+    ultraObject.eCSearch({
         list:dev_obj.list,
         look:dev_obj.look,
     })
-    removeCN()    
+    ultraObject.removeCN({rules:'all'})
 }
+
+
+function preFillForm(   dev_obj   ){
+    ultraObject.allTags = dev_obj.allTags
+    ultraObject.eCSearch({
+        list:dev_obj.list,
+        look:dev_obj.look,
+    })
+    ultraObject.removeOP({rules:'duplicates'})
+    
+}
+
+// whats a good rules if parameters are part of the ultraObject or come in as an argument
+// if a function naturally passes arguments to a function, dev params must go to the ultraObject
+
