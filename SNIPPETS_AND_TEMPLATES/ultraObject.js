@@ -6,7 +6,10 @@
 //if your find problems search PROBLEMS to see whats going on
 
 //is {}[] allowed in ES5
-var ultraObject = {
+
+// FL_0_i for loop object in the purpose action
+function ultraObjectReset(   dev_obj   ){
+    return {
     eventName:"",           //wants a DOMString event name
     event_obj:undefined,              //wants an Event
     DOM_child:{0:undefined}, // wants a DOM element
@@ -39,9 +42,28 @@ var ultraObject = {
     isObject:isObject,
     elementFound:{}, // holds found elements needed by the ultraObject
     removeCN:removeCN,
-    removeOP:removeOP
-    
-    
+    removeOP:removeOP,
+    identifyE:identifyE,
+    identifyEO:{}, // object for all needed identified
+    forLoop:forLoop,
+    objInvloved:objInvloved,// to keep track of all items responbile for a purpose at a specific point
+    objIO:{}, // OBKECT FOR VobjInvloved
+    objIO_0_i:{}
+    }
+}
+var ultraObject = ultraObjectReset()
+function objInvloved(   dev_obj   ){
+        ultraObject.objIO = dev_obj
+        var objInvloved_0_i = 0
+        ultraObject.objIO_0_i={
+            forLoop_0_i: objInvloved_0_i,
+            forLoopLength:Object.entries(   dev_obj   ).length,
+            fn:function(      ){
+                console.log(   ultraObject.objIO[ultraObject.objIO_0_i.forLoop_0_i]   )
+                },
+            args:undefined
+        }
+        forLoop(   ultraObject.objIO_0_i   )
 }
 function addEventListener(   dev_obj   ){
         var fn;
@@ -360,8 +382,8 @@ function eCSearch(   dev_obj   ){
                     }
                     
                     
-                    console.log(   eCSearchProp_obj.cBQ, eCSearchList[eCSearch_2_i]   )
-                    console.log(   eCSearchProp_obj.cBQ === eCSearchList[eCSearch_2_i]     )
+                    // console.log(   eCSearchProp_obj.cBQ, eCSearchList[eCSearch_2_i]   )
+                    // console.log(   eCSearchProp_obj.cBQ === eCSearchList[eCSearch_2_i]     )
                     if(   eCSearchProp_obj.cBQ === eCSearchList[eCSearch_2_i]     ){
                         //PROBLEMS
                         
@@ -371,7 +393,13 @@ function eCSearch(   dev_obj   ){
                         if(   ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] !== eCSearchElem   ){
                             
                             
-                            ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] = {item:eCSearchElem,query:eCSearchProp}
+                            ultraObject.elementFound[Object.keys(   ultraObject.elementFound   ).length] = {
+                                
+                                item:eCSearchElem,
+                                query:eCSearchProp,
+                                xMark:eCSearchLook[eCSearch_1_i]
+                            
+                                } // the bug for removing pharma charts
                                 
                             
                             
@@ -428,8 +456,6 @@ function removeCN(   dev_obj   ){
     console.log(   'compeleted'   )
 }
 function removeOP(   dev_obj   ){
-    
-    
     var removeOPLength;
     var removeOPObj = {}
     if(   dev_obj !== undefined   ){
@@ -482,13 +508,91 @@ function removeOP(   dev_obj   ){
         // if the rules are differnent consider before items are removed
     }
     
-    
-    console.log(   this.elementFound   )
-    
+        
 } //remove specific properties from obj
+function forLoop(   dev_obj   ){
+    
+    
+    if(   dev_obj !== undefined   ){
 
+        
+        for(   dev_obj.forLoop_0_i; dev_obj.forLoop_0_i !== dev_obj.forLoopLength; dev_obj.forLoop_0_i++   ){
+                dev_obj.fn()// find a better way to do this
+        }
+        dev_obj.forLoop_0_i = 0
 
+        
+    }
+}
+function identifyE(   dev_obj   ){
+    var identifyELength = Object.keys(   ultraObject.elementFound   ).length
+    var identifyEC = {} //identify element  Check checls for parents and children for the right node
+    for(   var identifyE_0_i = 0; identifyE_0_i !== identifyELength; identifyE_0_i++   ){
+        
+        
+        if(   dev_obj !== undefined   ){
+            
+           
+            if(   dev_obj.action === 'preFill'   ){
+                
+                
+                if(   ultraObject.elementFound[identifyE_0_i].item.tagName.toLowerCase() !== 'input'   ){// if there is more needed make a function im not writing these massive loops
+                    identifyEC['0'] = ultraObject.elementFound[identifyE_0_i].item
+                    var identifyE_1_i = 0
+                    var iEFL_0_i ={
+                        forLoop_0_i: identifyE_1_i,
+                        forLoopLength:ultraObject.elementFound[identifyE_0_i].item.children.length,
+                        fn:function(   dev_obj   ){
+                            
+                            
+                                if(   ultraObject.identifyEO[identifyE_0_i] === undefined   ){
+                                    
+                                    
+                                    ultraObject.identifyEO[identifyE_0_i]  = {item : {}}
+                                    
+                                                                        
+                                }
+                                
+                                
+                                if(   identifyEC['0'].children[iEFL_0_i.forLoop_0_i].tagName.toLowerCase() === 'input'   ){
+                                    
+                                    
+                                console.log(   identifyEC['0'].children[iEFL_0_i.forLoop_0_i].tagName.toLowerCase()   )
+                                console.log(   Object.entries(   ultraObject.identifyEO   )   )
+                                console.log(   ultraObject.identifyEO[identifyE_0_i],identifyE_0_i   )
+                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_0_i.forLoop_0_i] = {item:{}}
+                                    ultraObject.identifyEO[identifyE_0_i].item[iEFL_0_i.forLoop_0_i].item[iEFL_0_i.forLoop_0_i] = identifyEC['0'].children[iEFL_0_i.forLoop_0_i]
+                                    
+                                
+                                }
+                                
+                                
+                            },
+                        args:undefined
+                    }
+                    console.log(   identifyE_0_i   )
+                    ultraObject.forLoop(   iEFL_0_i   )
+                    // console.log(   ultraObject.elementFound[identifyE_0_i].item.parentElement   )
+                    // if not found in the parentNode find in the parentElement
+                    // child nodes may contain text nodes
+                        
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    objInvloved({
+        0:ultraObject.elementFound,
+        1:ultraObject.identifyEO
+    })
+} // identifies tags in elementFound and what is needed to do the next tasl
 
+// if(   dev_obj !== undefined   )
 
 
 
@@ -531,9 +635,22 @@ function preFillForm(   dev_obj   ){
         look:dev_obj.look,
     })
     ultraObject.removeOP({rules:'duplicates'})
+    ultraObject.identifyE({
+                action:'preFill'
+            })
+    
     
 }
 
+            preFillForm({
+                allTags : [document.querySelectorAll("body *")[129],document.querySelectorAll("body *")[135],document.querySelectorAll("body *")[140],document.querySelectorAll("body *")[147]],
+                list:{
+                   'LinkedIn Profile':'https://www.linkedin.com/in/michael-odumosu-a58367b1',
+                    'Website':'https://ualbanyasist.github.io/',
+                    'How did you hear about this job?':'Linkedin',
+                    'What is your desired Salary?': '$80,000'},
+                look:{ 'innerHTML':null,'innerText':null,'textContext':null}
+            })
 // whats a good rules if parameters are part of the ultraObject or come in as an argument
 // if a function naturally passes arguments to a function, dev params must go to the ultraObject
 
