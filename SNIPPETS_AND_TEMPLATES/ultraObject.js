@@ -431,6 +431,7 @@ function removeOP(   dev_obj   ){
     
     
     var removeOPLength;
+    var removeOPObj = {}
     if(   dev_obj !== undefined   ){
         
                     
@@ -462,6 +463,20 @@ function removeOP(   dev_obj   ){
                                 
                 
             }
+            for(   var removeOP_2_i = 0; removeOP_2_i !== removeOPLength; removeOP_2_i++   ){
+                
+                
+                if(   this.elementFound[removeOP_2_i].item !== null   ){
+                    
+                    
+                    removeOPObj[Object.keys(   removeOPObj   ).length] = this.elementFound[removeOP_2_i]
+                    
+                    
+                }
+                
+                
+            }
+            this.elementFound = removeOPObj
         }
         
         // if the rules are differnent consider before items are removed
